@@ -26,7 +26,7 @@
 			// Options: throw an error if no update is received every 30 seconds.
 			//
 			//navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 30000, enableHighAccuracy: true });	
-			watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy: false });	
+			watchID = navigator.geolocation.watchPosition(onSuccess, onError, {maximumAge:600000, timeout:5000, enableHighAccuracy: true});	
         }
 
 		// onSuccess Callback
