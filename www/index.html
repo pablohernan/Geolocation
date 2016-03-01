@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="cordova.js"></script>
+    <title>Geolocation</title>
+  </head>
+  <body>
+  
+
+  <div id="geolocation"></div>
+  
+  
+  
+    <script>
+    
+	
+		var watchID;
+		var count = 0;
+       // Wait for Cordova to load 
+        document.addEventListener("deviceready", onDeviceReady, false);
+
+        // Cordova is ready      
+        function onDeviceReady() {
+			// Options: throw an error if no update is received every 30 seconds.
+			//
+			//navigator.geolocation.getCurrentPosition(onSuccess, onError, { maximumAge: 3000, timeout: 30000, enableHighAccuracy: true });	
+			watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy: false });	
+        }
+
+		// onSuccess Callback
+		//   This method accepts a `Position` object, which contains
+		//   the current GPS coordinates
+		//
+		function onSuccess(position) {
+			var element = document.getElementById('geolocation');
+			
+			element.innerHTML = JSON.stringify( position, null, 4 )
+			
+			
+			element.innerHTML = 'Count: '  + count + '<br />' +
+								'Latitude: '  + position.coords.latitude      + '<br />' +
+								'Longitude: ' + position.coords.longitude     + '<br />' +
+								'Accuracy: ' + position.coords.accuracy     + '<br />' +
+								'<hr />'      + element.innerHTML;
+								
+			count++;					
+								
+		}
+		
+		// onError Callback receives a PositionError object
+		//
+		function onError(error) {
+			alert('code: '    + error.code    + '\n' +
+				  'message: ' + error.message + '\n');
+		}
+		
+		
+		
+		
+
+
+    </script>
+  </body>
+</html>
